@@ -1,0 +1,31 @@
+# woncamp 블로그 설정
+
+blog_name: "woncamp"
+blog_url: "https://woncamp.example.com"
+
+# 문체 및 톤
+tone: "친근하고 전문적인"
+style: "초보자도 이해하기 쉬운 설명"
+target_audience: "개발 입문자 및 중급자"
+
+# SEO 설정
+primary_keywords:
+  - "개발"
+  - "프로그래밍"
+  - "기술 블로그"
+
+# 글 작성 루프
+writing_loop:
+  introduction: "문제 제기 또는 흥미로운 질문으로 시작"
+  body: "단계별 설명 + 코드 예제 + 실용적인 팁"
+  conclusion: "핵심 요약 + 다음 단계 안내"
+
+# 이미지 설정
+image_style: "깔끔한 다이어그램 또는 스크린샷"
+image_count: 3-5
+
+# OSMU 플랫폼
+osmu_platforms:
+  - youtube
+  - instagram
+  - twitter

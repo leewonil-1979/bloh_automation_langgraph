@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{meta_description}}">
+    <meta name="keywords" content="{{tags}}">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:description" content="{{meta_description}}">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{title}}">
+    <meta name="twitter:description" content="{{meta_description}}">
+    
+    <title>{{title}}</title>
+    
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- SEO 최적화: 구조화된 데이터 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{title}}",
+        "description": "{{meta_description}}",
+        "keywords": "{{tags}}"
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- 네비게이션 -->
+        </nav>
+    </header>
+    
+    <main>
+        <article class="blog-post">
+            <header class="post-header">
+                <h1>{{title}}</h1>
+                <div class="post-meta">
+                    <time datetime="{{created_at}}">{{created_at}}</time>
+                    <div class="tags">
+                        {{tags}}
+                    </div>
+                </div>
+            </header>
+            
+            <div class="post-content">
+                {{content}}
+            </div>
+            
+            <footer class="post-footer">
+                <!-- 공유 버튼, 관련 글 등 -->
+            </footer>
+        </article>
+    </main>
+    
+    <footer>
+        <!-- 사이트 푸터 -->
+    </footer>
+</body>
+</html>

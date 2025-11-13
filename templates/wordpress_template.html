@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{meta_description}}">
+    <meta name="keywords" content="{{tags}}">
+    <title>{{title}}</title>
+    <style>
+        /* WordPress 최적화 스타일 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.8;
+            color: #1a1a1a;
+        }
+        .entry-content {
+            max-width: 840px;
+            margin: 0 auto;
+        }
+        .entry-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 1.875em;
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-top: 1.25em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin-bottom: 1.5em;
+        }
+        .wp-block-image {
+            margin: 2em 0;
+        }
+        .wp-block-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        blockquote {
+            border-left: 4px solid #0073aa;
+            padding-left: 1.5em;
+            margin: 1.5em 0;
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <article class="entry-content">
+        <h1 class="entry-title">{{title}}</h1>
+        <div>
+            {{content}}
+        </div>
+    </article>
+</body>
+</html>

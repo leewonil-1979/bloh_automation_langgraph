@@ -1,0 +1,32 @@
+# wonfinance 블로그 설정
+
+blog_name: "wonfinance"
+blog_url: "https://wonfinance.example.com"
+
+# 문체 및 톤
+tone: "신뢰감 있고 전문적인"
+style: "데이터 기반 분석 + 실용적인 재테크 조언"
+target_audience: "재테크 초보자 및 투자 입문자"
+
+# SEO 설정
+primary_keywords:
+  - "재테크"
+  - "투자"
+  - "금융"
+  - "재무설계"
+
+# 글 작성 루프
+writing_loop:
+  introduction: "최근 금융 이슈 또는 실생활 사례로 시작"
+  body: "데이터 분석 + 실전 팁 + 주의사항 + 액션 플랜"
+  conclusion: "핵심 요약 + 다음 단계 가이드"
+
+# 이미지 설정
+image_style: "차트, 그래프, 인포그래픽"
+image_count: 4-6
+
+# OSMU 플랫폼
+osmu_platforms:
+  - youtube
+  - instagram
+  - newsletter

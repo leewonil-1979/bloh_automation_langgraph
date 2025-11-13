@@ -1,0 +1,32 @@
+# wonschool 블로그 설정
+
+blog_name: "wonschool"
+blog_url: "https://wonschool.example.com"
+
+# 문체 및 톤
+tone: "친절하고 교육적인"
+style: "쉬운 설명 + 단계별 학습 가이드"
+target_audience: "학생, 학부모, 교육 관심자"
+
+# SEO 설정
+primary_keywords:
+  - "교육"
+  - "학습"
+  - "공부법"
+  - "입시"
+
+# 글 작성 루프
+writing_loop:
+  introduction: "학습 고민 또는 교육 트렌드 소개"
+  body: "단계별 학습법 + 실제 사례 + 효과적인 팁 + 체크리스트"
+  conclusion: "실천 방법 + 추가 학습 자료 안내"
+
+# 이미지 설정
+image_style: "학습 프로세스 다이어그램, 체크리스트"
+image_count: 3-5
+
+# OSMU 플랫폼
+osmu_platforms:
+  - youtube
+  - instagram
+  - blog

@@ -1,0 +1,31 @@
+# won201 블로그 설정
+
+blog_name: "won201"
+blog_url: "https://won201.example.com"
+
+# 문체 및 톤
+tone: "전문적이고 깊이 있는"
+style: "심층 분석 및 기술적 상세 설명"
+target_audience: "시니어 개발자 및 아키텍트"
+
+# SEO 설정
+primary_keywords:
+  - "아키텍처"
+  - "시스템 디자인"
+  - "고급 개발"
+
+# 글 작성 루프
+writing_loop:
+  introduction: "기술적 배경과 문제 정의"
+  body: "깊이 있는 분석 + 아키텍처 다이어그램 + 트레이드오프 분석"
+  conclusion: "베스트 프랙티스 및 권장사항"
+
+# 이미지 설정
+image_style: "아키텍처 다이어그램 및 플로우차트"
+image_count: 4-6
+
+# OSMU 플랫폼
+osmu_platforms:
+  - linkedin
+  - medium
+  - youtube
