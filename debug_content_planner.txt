@@ -1,0 +1,255 @@
+```json
+{
+  "topic": "반려견과 함께하는 여행 준비 체크리스트",
+  "analysis": {
+    "common_patterns": ["체크리스트 형태로 정보 제공", "여행지 및 계절별로 세분화", "반려견 안전 & 행복 강조"],
+    "content_gaps": ["여행 중 반려견의 스트레스 관리 방법", "반려견과 함께 갈 수 있는 숨겨진 여행지 소개"],
+    "target_keywords": ["반려견 여행", "여행 체크리스트", "강아지 동반 여행"]
+  },
+  "30_days_plan": [
+    {
+      "day": 1,
+      "title": "반려견과 함께하는 여행 준비 체크리스트의 중요성",
+      "content_type": "기본개념",
+      "target_audience": "초보자",
+      "main_keywords": ["반려견 여행 체크리스트", "여행 준비 중요성"],
+      "estimated_words": 1500,
+      "outline": ["반려견 여행 개요", "체크리스트의 필요성", "체크리스트 활용 방법"]
+    },
+    {
+      "day": 2,
+      "title": "강아지와 함께 여행 준비하는 방법: 10가지 필수 체크리스트",
+      "content_type": "HOW-TO",
+      "target_audience": "중급자",
+      "main_keywords": ["여행 준비 방법", "강아지 필수 체크리스트"],
+      "estimated_words": 1500,
+      "outline": ["여행 계획 세우기", "필수 아이템 정리", "여행 전 점검사항"]
+    },
+    {
+      "day": 3,
+      "title": "해외 여행을 위한 반려견 필수 준비물 비교",
+      "content_type": "비교/리뷰",
+      "target_audience": "전문가",
+      "main_keywords": ["해외 반려견 준비물", "여행 필수 아이템 비교"],
+      "estimated_words": 1500,
+      "outline": ["해외 여행 조건", "지역별 필수 준비물", "비교 결론"]
+    },
+    {
+      "day": 4,
+      "title": "초보자를 위한 반려견 여행 준비 체크리스트",
+      "content_type": "초보자 팁",
+      "target_audience": "초보자",
+      "main_keywords": ["초보자 체크리스트", "반려견 여행 준비"],
+      "estimated_words": 1500,
+      "outline": ["초보자의 고민", "체크리스트 작성 방법", "여행 안전 사항"]
+    },
+    {
+      "day": 5,
+      "title": "전문가가 추천하는 반려견 여행 짐싸기 비법",
+      "content_type": "전문가 팁",
+      "target_audience": "전문가",
+      "main_keywords": ["짐싸기 비법", "전문가 조언"],
+      "estimated_words": 1500,
+      "outline": ["효율적인 짐싸기", "반려견 건강 유지를 위한 요소", "전문가의 팁"]
+    },
+    {
+      "day": 6,
+      "title": "여름철 반려견과의 안전한 여행을 위한 체크리스트",
+      "content_type": "체크리스트/정리",
+      "target_audience": "중급자",
+      "main_keywords": ["여름철 여행 안전", "반려견 체크리스트"],
+      "estimated_words": 1500,
+      "outline": ["여름철 여행의 특징", "필수 체크리스트 항목", "안전 고려 사항"]
+    },
+    {
+      "day": 7,
+      "title": "반려견과의 자동차 여행: 준비물 총정리",
+      "content_type": "HOW-TO",
+      "target_audience": "초보자",
+      "main_keywords": ["자동차 여행 준비물", "반려견 자동차 여행"],
+      "estimated_words": 1500,
+      "outline": ["자동차 여행의 장점", "체크리스트 아이템", "여행 중 주의 사항"]
+    },
+    {
+      "day": 8,
+      "title": "가을 캠핑 시 반려견과 함께 챙겨야 할 준비물",
+      "content_type": "HOW-TO",
+      "target_audience": "중급자",
+      "main_keywords": ["가을 캠핑 준비물", "반려견 캠핑"],
+      "estimated_words": 1500,
+      "outline": ["가을 캠핑의 매력", "필수 준비물", "가을 캠핑 TIP"]
+    },
+    {
+      "day": 9,
+      "title": "여행 중 반려견과의 스트레스 관리 방법",
+      "content_type": "사례 연구",
+      "target_audience": "중급자",
+      "main_keywords": ["스트레스 관리", "반려견 행복 여행"],
+      "estimated_words": 1500,
+      "outline": ["여행으로 인한 스트레스", "대처 방법", "실제 사례"]
+    },
+    {
+      "day": 10,
+      "title": "가장 인기 있는 반려견 여행지와 그 이유",
+      "content_type": "비교/리뷰",
+      "target_audience": "전문가",
+      "main_keywords": ["인기 여행지", "반려견 여행지"],
+      "estimated_words": 1500,
+      "outline": ["여행지 특징", "추천 이유", "여행지별 체크리스트"]
+    },
+    {
+      "day": 11,
+      "title": "반려견과 함께하는 해변 여행 체크리스트",
+      "content_type": "체크리스트/정리",
+      "target_audience": "초보자",
+      "main_keywords": ["해변 여행 체크리스트", "반려견 해변"],
+      "estimated_words": 1500,
+      "outline": ["해변 여행의 매력", "체크리스트 항목", "주의사항"]
+    },
+    {
+      "day": 12,
+      "title": "반려견과 함께하는 캠핑: 준비물 체크리스트",
+      "content_type": "HOW-TO",
+      "target_audience": "중급자",
+      "main_keywords": ["반려견 캠핑 준비", "체크리스트"],
+      "estimated_words": 1500,
+      "outline": ["캠핑의 매력", "반려견 준비물", "캠핑 시 유의사항"]
+    },
+    {
+      "day": 13,
+      "title": "반려견 여행, 필요성에 대한 진지한 고찰",
+      "content_type": "사례 연구",
+      "target_audience": "중급자",
+      "main_keywords": ["여행 필요성", "반려견과의 여행"],
+      "estimated_words": 1500,
+      "outline": ["여행의 장점", "사례 분석", "결론"]
+    },
+    {
+      "day": 14,
+      "title": "반려견과 함께하는 고속도로 여행 팁",
+      "content_type": "HOW-TO",
+      "target_audience": "초보자",
+      "main_keywords": ["고속도로 여행", "반려견 팁"],
+      "estimated_words": 1500,
+      "outline": ["고속도로 여행 준비", "안전 고려 항목", "여행 중 활동"]
+    },
+    {
+      "day": 15,
+      "title": "서울 및 경기 지역 반려견 동반 여행지",
+      "content_type": "비교/리뷰",
+      "target_audience": "중급자",
+      "main_keywords": ["서울 여행지", "경기 지역 반려견"],
+      "estimated_words": 1500,
+      "outline": ["지역별 추천", "각 여행지 리뷰", "방문 시 유의사항"]
+    },
+    {
+      "day": 16,
+      "title": "반려견과 함께 떠나는 첫 여행 준비물 체크리스트",
+      "content_type": "체크리스트/정리",
+      "target_audience": "초보자",
+      "main_keywords": ["첫 여행 준비", "체크리스트"],
+      "estimated_words": 1500,
+      "outline": ["첫 여행의 중요성", "추천 준비물", "여행 기분 조성"]
+    },
+    {
+      "day": 17,
+      "title": "반려견과 함께 떠나는 바닷가 여행 총정리",
+      "content_type": "HOW-TO",
+      "target_audience": "중급자",
+      "main_keywords": ["바닷가 여행 준비", "반려견 체크"],
+      "estimated_words": 1500,
+      "outline": ["해변 여행의 매력", "준비물 정리", "여행 팁"]
+    },
+    {
+      "day": 18,
+      "title": "반려견 여행 중 필수 마사지 기법",
+      "content_type": "전문가 팁",
+      "target_audience": "전문가",
+      "main_keywords": ["마사지 기법", "반려견 여행"],
+      "estimated_words": 1500,
+      "outline": ["마사지의 필요성", "기법 소개", "효과"]
+    },
+    {
+      "day": 19,
+      "title": "반려견 여행, 무엇을 포기해야 할까?",
+      "content_type": "사례 연구",
+      "target_audience": "중급자",
+      "main_keywords": ["여행 포기사항", "반려견 동반"],
+      "estimated_words": 1500,
+      "outline": ["포기할 아이템 목록", "대체 옵션", "소중한 결정"]
+    },
+    {
+      "day": 20,
+      "title": "헤어 드라이어부터 처음 준비물까지: 반려견 여행 필수 아이템",
+      "content_type": "비교/리뷰",
+      "target_audience": "초보자",
+      "main_keywords": ["필수 아이템", "여행 준비물 리뷰"],
+      "estimated_words": 1500,
+      "outline": ["아이템 리스트", "비교 및 평", "대안"]
+    },
+    {
+      "day": 21,
+      "title": "반려견 해변 여행 필수 준비물 체크리스트",
+      "content_type": "체크리스트/정리",
+      "target_audience": "초보자",
+      "main_keywords": ["해변 여행 체크리스트", "반려견 필수 아이템"],
+      "estimated_words": 1500,
+      "outline": ["해변 여행의 즐거움", "주요 체크리스트 항목", "주의 사항"]
+    },
+    {
+      "day": 22,
+      "title": "부모와 함께 떠나는 반려견 여행: 체크리스트",
+      "content_type": "HOW-TO",
+      "target_audience": "중급자",
+      "main_keywords": ["가족 여행", "부모와 반려견"],
+      "estimated_words": 1500,
+      "outline": ["부모와의 여행 준비", "체크리스트 공유", "여행 제안"]
+    },
+    {
+      "day": 23,
+      "title": "반려견과 함께 캠핑: 준비부터 체크리스트",
+      "content_type": "HOW-TO",
+      "target_audience": "초보자",
+      "main_keywords": ["캠핑 준비", "반려견 체크리스트"],
+      "estimated_words": 1500,
+      "outline": ["캠핑 준비 단계", "필수 체크리스트", "안전 수칙"]
+    },
+    {
+      "day": 24,
+      "title": "반려견과의 여행, 반드시 챙겨야 할 건강 관리 팁",
+      "content_type": "전문가 팁",
+      "target_audience": "전문가",
+      "main_keywords": ["건강 관리", "여행 중 반려견"],
+      "estimated_words": 1500,
+      "outline": ["건강 관리의 중요성", "여행 중 체크 사항", "전문가 조언"]
+    },
+    {
+      "day": 25,
+      "title": "여행 중 반려견의 안전을 위한 필수 체크사항",
+      "content_type": "HOW-TO",
+      "target_audience": "중급자",
+      "main_keywords": ["반려견 안전", "여행 체크"],
+      "estimated_words": 1500,
+      "outline": ["여행의 위험 요소", "안전 대책", "체크리스트"]
+    },
+    {
+      "day": 26,
+      "title": "국내 최고의 반려견 캠핑장 비교",
+      "content_type": "비교/리뷰",
+      "target_audience": "전문가",
+      "main_keywords": ["반려견 캠핑장 리뷰", "비교 리뷰"],
+      "estimated_words": 1500,
+      "outline": ["캠핑장 특징 소개", "비교 요소", "추천 캠핑장"]
+    },
+    {
+      "day": 27,
+      "title": "태국 여행 시 반려견과의 체크리스트",
+      "content_type": "체크리스트/정리",
+      "target_audience": "중급자",
+      "main_keywords": ["태국 여행 체크리스트", "반려견 동반"],
+      "estimated_words": 1500,
+      "outline": ["태국 여행 준비", "체크리스트 항목", "여행 유의사항"]
+    },
+    {
+      "day": 28,
+      "title": "강아
