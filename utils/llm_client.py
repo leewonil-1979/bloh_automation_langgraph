@@ -28,15 +28,21 @@ class LLMClient:
             logger.exception("OpenAI 클라이언트 초기화 실패")
             raise e
 
-    def chat(self, prompt: str, max_tokens: int = 3000) -> str:
+    def chat(self, prompt: str, max_tokens: int = 3000, json_mode: bool = False) -> str:
         """GPT 챗 완료 호출"""
 
         try:
-            response = self.client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=max_tokens
-            )
+            params = {
+                "model": "gpt-4o-mini",
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": max_tokens
+            }
+            
+            # JSON 모드 활성화 (유효한 JSON만 반환)
+            if json_mode:
+                params["response_format"] = {"type": "json_object"}
+            
+            response = self.client.chat.completions.create(**params)
             content = response.choices[0].message.content
             return content if content else ""
 

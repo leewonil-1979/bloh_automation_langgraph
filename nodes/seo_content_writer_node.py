@@ -25,8 +25,8 @@ class SEOContentWriterNode:
     """SEO 콘텐츠 자동 생성 노드"""
     
     def __init__(self):
-        self.gpt = LLMClient()  # 구조 생성용
-        self.claude = HybridLLMClient()  # 본문 작성용
+        self.gpt = LLMClient()  # GPT로 구조 + 본문 모두 생성 (json_mode 사용)
+        logger.info("📝 SEO Content Writer 초기화 (GPT json_mode)")
     
     def generate_all(
         self,
@@ -272,126 +272,250 @@ class SEOContentWriterNode:
         # 톤 가이드 추출
         personality = tone_guide.get("tone_guide", {}).get("personality", "친근하고 공감하는")
         voice = tone_guide.get("tone_guide", {}).get("voice", "1인칭")
-        opening_pattern = tone_guide.get("structure_template", {}).get("opening", {}).get("pattern", "")
-        closing_pattern = tone_guide.get("structure_template", {}).get("closing", {}).get("pattern", "")
-        paragraph_rule = tone_guide.get("writing_rules", {}).get("paragraph_spacing", "2~3줄마다 공백")
+        opening_example = tone_guide.get("structure_template", {}).get("opening", {}).get("example", "")
+        closing_examples = tone_guide.get("structure_template", {}).get("closing", {}).get("cta_examples", [])
         optimal_length = tone_guide.get("content_length", {}).get("optimal", 1800)
         
-        # SERP 인사이트
-        serp_insight = ""
-        if serp_context:
-            top_keywords = serp_context.get("top_keywords", [])[:5]
-            if top_keywords:
-                serp_insight = f"\n\n# SERP 인기 키워드\n{', '.join(top_keywords)}"
+        # 구조에서 섹션 정보 추출
+        sections = structure.get("sections", [])[:6]  # 최대 6개
         
-        prompt = f"""당신은 네이버 블로그 SEO 최적화 전문 작가입니다.
-주어진 구조에 맞춰 독자가 끝까지 읽고 싶어하는 고품질 블로그 글을 작성하세요.
+        # 모든 섹션 상세 정보 생성
+        sections_detail = ""
+        for idx, section in enumerate(sections, 1):
+            h2 = section.get('h2', f'섹션 {idx}')
+            h3_list = section.get('h3_list', [])
+            
+            sections_detail += f"\n**섹션 {idx}: {h2}**\n"
+            for h3_idx, h3 in enumerate(h3_list[:2], 1):  # H3는 최대 2개
+                sections_detail += f"- H3-{h3_idx}: {h3}\n"
+                sections_detail += f"  • 단락 1: 문제 제기 또는 배경 설명 (80~140자, 3~4문장)\n"
+                sections_detail += f"  • 단락 2: 구체적 해결책 또는 방법 (실제 예시 포함)\n"
+                sections_detail += f"  • 단락 3: 효과 또는 주의사항\n"
+        
+        prompt = f"""당신은 한국 네이버 블로그 SEO 전문 작가입니다.
+아래 지침을 **정확히** 따라 블로그 글을 작성하세요.
 
-# 글 정보
+## 📋 작성할 글 정보
 - Day: {day_num}
 - 제목: {title}
 - 카테고리: {category}
-- 목표 글자 수: {optimal_length}자{serp_insight}
+- 톤: {personality}, {voice} 사용
+- 목표 글자 수: {optimal_length}자
 
-# 문체·톤 가이드
-- 성격: {personality}
-- 음성: {voice}
-- 오프닝: {opening_pattern}
-- 마무리: {closing_pattern}
-- 단락 규칙: {paragraph_rule}
+## ✍️ 작성 지침 (반드시 준수)
 
-# 글 구조 (반드시 따를 것)
-{json.dumps(structure, ensure_ascii=False, indent=2)}
+### 1. 오프닝 (80~120자)
+개인 경험으로 시작하여 독자 공감 유도:
+예시: "{opening_example if opening_example else '작년 여름, 아이들과 여행 준비하다가 이것 때문에 고생했던 기억 있으신가요?'}"
 
-# 작성 규칙
-1. **오프닝** (80~120자)
-   - 개인 경험으로 공감 유도
-   - 자연스럽게 문제 제기
-   - 독자의 호기심 자극
+**작성 규칙:**
+- 1인칭 시점 (저, 제가)
+- 구체적 경험 1문장
+- 공감 질문 1문장
+- 총 2~3문장, 80~120자
 
-2. **본문** (각 섹션)
-   - H2마다 이모지 1개 사용
-   - 80~140자 단락, 3~4문장
-   - 핵심 키워드 자연스럽게 배치
-   - 구체적 예시/수치 포함
-   - 표는 insert_after_section 위치에 삽입
-   - 리스트도 지정 위치에 삽입
+### 2. 본문 섹션 (총 {len(sections)}개 - 모두 작성 필수!)
 
-3. **FAQ** (본문 마지막)
-   - 3개 질문과 간결한 답변
-   - 검색 의도 충족
+⚠️ **중요: 아래 모든 섹션을 빠짐없이 작성하세요!**
+{sections_detail}
 
-4. **마무리** (60~100자)
-   - 핵심 요약 1문장
-   - 행동 유도 (CTA)
-   - 다음 글 예고 (선택)
+각 H3마다 3개 단락 작성 (80~140자/단락)
 
-5. **내부 링크**
-   - 관련 Day 글 자연스럽게 연결
-   - "이전에 소개한 [링크] 글도 참고하세요"
+### 3. 표 작성 ({structure.get('table', {}).get('title', '비교표')})
+HTML 형식:
+```html
+<table border="1" style="width:100%; border-collapse:collapse;">
+  <thead>
+    <tr style="background-color:#f0f0f0;">
+      <th>항목</th>
+      <th>내용</th>
+      <th>특징</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>예시1</td>
+      <td>구체적 설명</td>
+      <td>장점/단점</td>
+    </tr>
+    <tr>
+      <td>예시2</td>
+      <td>구체적 설명</td>
+      <td>장점/단점</td>
+    </tr>
+  </tbody>
+</table>
+```
 
-# 출력 형식 (JSON)
+### 4. 체크리스트 작성
+HTML 형식:
+```html
+<ul style="list-style-type:none; padding-left:0;">
+  <li>✅ 항목 1: 구체적 설명</li>
+  <li>✅ 항목 2: 구체적 설명</li>
+  <li>✅ 항목 3: 구체적 설명</li>
+  <li>✅ 항목 4: 구체적 설명</li>
+  <li>✅ 항목 5: 구체적 설명</li>
+</ul>
+```
+
+### 5. FAQ (3개)
+각 질문마다:
+- 질문: 실제 검색할 만한 구체적 질문
+- 답변: 2~3문장, 핵심만 간결하게
+
+예시:
+Q: {title}은 언제 시작하는 게 좋나요?
+A: 최소 2주 전부터 시작하는 것이 좋습니다. 특히 해외 여행이라면 한 달 전부터 준비하면 여유롭게 챙길 수 있어요.
+
+### 6. 마무리 (60~100자)
+CTA 포함:
+예시: "{closing_examples[0] if closing_examples else '오늘 소개한 방법으로 준비하시면 즐거운 시간 되실 거예요!'}"
+
+**작성 규칙:**
+- 핵심 요약 1문장
+- 행동 유도 1문장
+- 총 2문장, 60~100자
+
+## 📤 출력 형식
+
+**중요: 아래 JSON 형식을 정확히 따르세요.**
+**⚠️ sections 배열에 {len(sections)}개의 섹션을 모두 포함하세요!**
+
+```json
 {{
   "day": {day_num},
   "title": "{title}",
-  "seo_title": "구조의 seo_title 그대로",
-  "meta_description": "구조의 meta_description 그대로",
-  "h1": "구조의 h1 그대로",
-  "opening": "오프닝 전체 텍스트 (80~120자)",
+  "seo_title": "{structure.get('seo_title', title)}",
+  "meta_description": "{structure.get('meta_description', '')}",
+  "h1": "{structure.get('h1', title)}",
+  "opening": "오프닝 텍스트 (80~120자)",
   "sections": [
     {{
-      "h2": "구조의 H2 그대로",
+      "h2": "{sections[0].get('h2', '') if sections else ''}",
       "h2_emoji": "📌",
       "h3_contents": [
         {{
-          "h3": "구조의 H3 그대로",
-          "paragraphs": [
-            "단락1 텍스트 (80~140자)",
-            "단락2 텍스트",
-            "단락3 텍스트"
-          ]
+          "h3": "{sections[0].get('h3_list', [''])[0] if sections and sections[0].get('h3_list') else ''}",
+          "paragraphs": ["단락1 (80~140자)", "단락2", "단락3"]
+        }},
+        {{
+          "h3": "{sections[0].get('h3_list', ['', ''])[1] if sections and len(sections[0].get('h3_list', [])) > 1 else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }}
+      ]
+    }},
+    {{
+      "h2": "{sections[1].get('h2', '') if len(sections) > 1 else ''}",
+      "h2_emoji": "💡",
+      "h3_contents": [
+        {{
+          "h3": "{sections[1].get('h3_list', [''])[0] if len(sections) > 1 and sections[1].get('h3_list') else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }},
+        {{
+          "h3": "{sections[1].get('h3_list', ['', ''])[1] if len(sections) > 1 and len(sections[1].get('h3_list', [])) > 1 else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }}
+      ]
+    }},
+    {{
+      "h2": "{sections[2].get('h2', '') if len(sections) > 2 else ''}",
+      "h2_emoji": "🎯",
+      "h3_contents": [
+        {{
+          "h3": "{sections[2].get('h3_list', [''])[0] if len(sections) > 2 and sections[2].get('h3_list') else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }},
+        {{
+          "h3": "{sections[2].get('h3_list', ['', ''])[1] if len(sections) > 2 and len(sections[2].get('h3_list', [])) > 1 else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }}
+      ]
+    }},
+    {{
+      "h2": "{sections[3].get('h2', '') if len(sections) > 3 else ''}",
+      "h2_emoji": "✨",
+      "h3_contents": [
+        {{
+          "h3": "{sections[3].get('h3_list', [''])[0] if len(sections) > 3 and sections[3].get('h3_list') else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }},
+        {{
+          "h3": "{sections[3].get('h3_list', ['', ''])[1] if len(sections) > 3 and len(sections[3].get('h3_list', [])) > 1 else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }}
+      ]
+    }},
+    {{
+      "h2": "{sections[4].get('h2', '') if len(sections) > 4 else ''}",
+      "h2_emoji": "🔥",
+      "h3_contents": [
+        {{
+          "h3": "{sections[4].get('h3_list', [''])[0] if len(sections) > 4 and sections[4].get('h3_list') else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }},
+        {{
+          "h3": "{sections[4].get('h3_list', ['', ''])[1] if len(sections) > 4 and len(sections[4].get('h3_list', [])) > 1 else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }}
+      ]
+    }},
+    {{
+      "h2": "{sections[5].get('h2', '') if len(sections) > 5 else ''}",
+      "h2_emoji": "🎁",
+      "h3_contents": [
+        {{
+          "h3": "{sections[5].get('h3_list', [''])[0] if len(sections) > 5 and sections[5].get('h3_list') else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
+        }},
+        {{
+          "h3": "{sections[5].get('h3_list', ['', ''])[1] if len(sections) > 5 and len(sections[5].get('h3_list', [])) > 1 else ''}",
+          "paragraphs": ["단락1", "단락2", "단락3"]
         }}
       ]
     }}
   ],
-  "table_html": "구조의 표를 HTML로 변환 (<table>...</table>)",
-  "checklist_html": "구조의 리스트를 HTML로 변환 (<ul><li>...</li></ul>)",
+  "table_html": "<table>...</table>",
+  "checklist_html": "<ul><li>✅ 항목1</li></ul>",
   "faq": [
     {{
-      "question": "구조의 질문",
-      "answer": "완성된 답변 (2~3문장)"
+      "question": "실제 검색 질문",
+      "answer": "간결한 답변 2~3문장"
     }}
   ],
-  "closing": "마무리 전체 텍스트 (60~100자)",
-  "internal_links": [
-    {{
-      "anchor_text": "링크 텍스트",
-      "target_day": 5,
-      "context": "링크 주변 문맥"
-    }}
-  ],
+  "closing": "마무리 텍스트 (60~100자)",
   "word_count": 1800,
-  "keywords_used": ["키워드1", "키워드2", "키워드3"]
+  "keywords_used": ["{title.split()[0]}", "키워드2", "키워드3"]
 }}
+```
 
-위 JSON 형식으로만 출력하세요. 추가 설명 없이 JSON만 출력하세요.
-반드시 {optimal_length}자 내외로 작성하세요."""
+## ⚠️ 반드시 지켜야 할 것
 
-        response = self.claude.chat(
+1. **JSON 문법 준수**: 문자열 안에 줄바꿈 금지! 모든 텍스트는 한 줄로 작성
+2. **글자 수**: 전체 {optimal_length}자 내외
+3. **단락 규칙**: 각 단락 80~140자, 3~4문장
+4. **구체성**: 추상적 표현 금지, 구체적 예시 필수
+5. **톤 일관성**: {personality}, {voice} 유지
+
+**⚠️ 중요: JSON 출력 규칙**
+- 반드시 유효한 JSON 형식
+- 모든 문자열은 한 줄로 작성 (줄바꿈 금지)
+- 따옴표는 작은따옴표(')로 대체
+- 구조 완전히 동일하게 유지
+
+위 JSON만 출력하세요."""
+
+        # GPT json_mode 사용 (100% 유효한 JSON 보장)
+        response = self.gpt.chat(
             prompt=prompt,
-            task_type="creative",
+            json_mode=True,
             max_tokens=4000
         )
         
-        # JSON 파싱
+        # JSON 파싱 (GPT는 항상 유효한 JSON 반환)
         try:
-            json_str = response.strip()
-            if "```json" in json_str:
-                json_str = json_str.split("```json")[1].split("```")[0].strip()
-            elif "```" in json_str:
-                json_str = json_str.split("```")[1].split("```")[0].strip()
-            
-            content = json.loads(json_str)
+            content = json.loads(response)
             
             # 전체 텍스트 조합 (검증용)
             full_text = content.get("opening", "")
@@ -405,9 +529,14 @@ class SEOContentWriterNode:
             
             logger.info(f"   ✅ 본문 작성 완료 ({len(full_text)}자)")
             return content
+            
+        except json.JSONDecodeError as e:
+            logger.error(f"❌ JSON 파싱 실패 (GPT): {e}")
+            logger.error(f"응답: {response[:500]}")
+            return self._get_default_content(day_num, title, structure)
+            
         except Exception as e:
-            logger.error(f"❌ 본문 JSON 파싱 실패: {e}")
-            logger.error(f"응답: {response[:300]}")
+            logger.error(f"❌ 예상치 못한 오류: {e}")
             return self._get_default_content(day_num, title, structure)
     
     def _get_default_content(
